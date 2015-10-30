@@ -1,8 +1,0 @@
-prefix=/home/guillaume/roscode/catkin_ws/src/netft_rdt_driver/build/devel
-
-Name: netft_rdt_driver
-Description: Description of netft_rdt_driver
-Version: 0.0.0
-Cflags: -I/home/guillaume/roscode/catkin_ws/src/netft_rdt_driver/include
-Libs: -L/home/guillaume/roscode/catkin_ws/src/netft_rdt_driver/build/devel/lib -lnetft_rdt_driver
-Requires: roscpp geometry_msgs diagnostic_updater diagnostic_msgs

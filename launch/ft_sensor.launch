@@ -2,7 +2,7 @@
 <launch>
 
 	<group ns="tf_sensor">
-		<arg name="ip_address" 	default="128.178.145.212" />
+		<arg name="ip_address" 	default="128.178.145.98" />
 		<node name="force_torque_sensor" pkg="netft_rdt_driver" type="netft_node"  args="--address $(arg ip_address)" required="true" output="screen"/>
 	</group>
 
