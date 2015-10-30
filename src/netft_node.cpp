@@ -131,7 +131,7 @@ int main(int argc, char **argv)
       else 
       {
         bias.compute_bias(data.wrench);
-        bias.update(data.wrench);
+//        bias.update(data.wrench); LET USER REMOVE HIS OWN BIAS
         pub.publish(data);
       }
     }
