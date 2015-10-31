@@ -65,7 +65,8 @@ bool NetFTRDTDriverBias::service_callback(netft_rdt_driver::String_cmd::Request&
         response.res = " command [" + cmd + "] sucessfully called";
         return true;
     }else if (cmd == "print"){
-        std::cout<< "commands : bias, print" << std::endl;
+        response.res = "commands : bias | print";
+        return true;
     }else{
        std::string res =  "no such cmd [" +  cmd +  "] defined        NetFTRDTDriverBias::service_callback";
        response.res = res;
