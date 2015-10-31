@@ -14,7 +14,7 @@ num_points(num_points)
     torque_b.y = 0;
     torque_b.z = 0;
 
-    service_server  = nh.advertiseService("ne_ft_bias_cmd",&NetFTRDTDriverBias::service_callback,this);
+    service_server  = nh.advertiseService("bias_cmd",&NetFTRDTDriverBias::service_callback,this);
     bComputeBias    = false;
 
 }
@@ -32,7 +32,6 @@ void NetFTRDTDriverBias::update(geometry_msgs::Wrench& wrench){
 }
 
 void NetFTRDTDriverBias::compute_bias(const geometry_msgs::Wrench& wrench){
-    //std::cout<< "compute_bias" << std::endl;
     if(bComputeBias){
         if(count < num_points){
             force_b.x  = force_b.x + wrench.force.x;
@@ -65,6 +64,8 @@ bool NetFTRDTDriverBias::service_callback(netft_rdt_driver::String_cmd::Request&
         bComputeBias=true;
         response.res = " command [" + cmd + "] sucessfully called";
         return true;
+    }else if (cmd == "print"){
+        std::cout<< "commands : bias, print" << std::endl;
     }else{
        std::string res =  "no such cmd [" +  cmd +  "] defined        NetFTRDTDriverBias::service_callback";
        response.res = res;
