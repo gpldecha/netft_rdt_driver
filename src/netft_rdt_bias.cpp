@@ -21,14 +21,15 @@ num_points(num_points)
 
 void NetFTRDTDriverBias::update(geometry_msgs::Wrench& wrench){
 
-    wrench.force.x = wrench.force.x - force_b.x;
-    wrench.force.y = wrench.force.y - force_b.y;
-    wrench.force.z = wrench.force.z - force_b.z;
+    if(!bComputeBias){
+        wrench.force.x = wrench.force.x - force_b.x;
+        wrench.force.y = wrench.force.y - force_b.y;
+        wrench.force.z = wrench.force.z - force_b.z;
 
-    wrench.torque.x = wrench.torque.x - torque_b.x;
-    wrench.torque.y = wrench.torque.y - torque_b.y;
-    wrench.torque.z = wrench.torque.z - torque_b.z;
-
+        wrench.torque.x = wrench.torque.x - torque_b.x;
+        wrench.torque.y = wrench.torque.y - torque_b.y;
+        wrench.torque.z = wrench.torque.z - torque_b.z;
+    }
 }
 
 void NetFTRDTDriverBias::compute_bias(const geometry_msgs::Wrench& wrench){
