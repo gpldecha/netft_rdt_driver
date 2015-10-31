@@ -30,8 +30,8 @@ private:
 private:
 
 
-    geometry_msgs::Vector3  force_b;
-    geometry_msgs::Vector3  torque_b;
+    geometry_msgs::Vector3  force_b,  force_b_tmp;
+    geometry_msgs::Vector3  torque_b, torque_b_tmp;
 
     ros::ServiceServer    service_server;
 
