@@ -62,6 +62,9 @@ bool NetFTRDTDriverBias::service_callback(netft_rdt_driver::String_cmd::Request&
 
     if(cmd == "bias"){
         bComputeBias=true;
+        force_b.x  = force_b.y  = force_b.z  = 0;
+        torque_b.x = torque_b.y = torque_b.z = 0;
+        count = 0;
         response.res = " command [" + cmd + "] sucessfully called";
         return true;
     }else if (cmd == "print"){

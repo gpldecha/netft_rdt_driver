@@ -15,7 +15,7 @@ class NetFTRDTDriverBias{
 
 public:
 
-    NetFTRDTDriverBias(ros::NodeHandle& nh,std::size_t num_points=200);
+    NetFTRDTDriverBias(ros::NodeHandle& nh,std::size_t num_points=500);
 
     void update(geometry_msgs::Wrench& wrench);
 
