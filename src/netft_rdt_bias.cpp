@@ -2,7 +2,7 @@
 
 namespace netft_rdt_driver {
 
-NetFTRDTDriverBias::NetFTRDTDriverBias(unsigned int num_points):
+NetFTRDTDriverBias::NetFTRDTDriverBias(ros::NodeHandle& nh,std::size_t num_points):
 num_points(num_points)
 {
     count                = 0;
@@ -14,7 +14,8 @@ num_points(num_points)
     torque_b.y = 0;
     torque_b.z = 0;
 
-    bComputeBias         = true;
+    service_server  = nh.advertiseService("ne_ft_bias_cmd",&NetFTRDTDriverBias::service_callback,this);
+    bComputeBias    = false;
 
 }
 
@@ -57,7 +58,22 @@ void NetFTRDTDriverBias::compute_bias(const geometry_msgs::Wrench& wrench){
     }
 }
 
-void NetFTRDTDriverBias::print_bias(){
+bool NetFTRDTDriverBias::service_callback(netft_rdt_driver::String_cmd::Request& request, netft_rdt_driver::String_cmd::Response& response){
+    std::string cmd = request.cmd;
+
+    if(cmd == "bias"){
+        bComputeBias=true;
+        response.res = " command [" + cmd + "] sucessfully called";
+        return true;
+    }else{
+       std::string res =  "no such cmd [" +  cmd +  "] defined        NetFTRDTDriverBias::service_callback";
+       response.res = res;
+       return false;
+    }
+
+}
+
+void NetFTRDTDriverBias::print_bias() const{
     std::cout<< "=== bias (mean) ===" <<std::endl;
     std::cout<< "F:         " << force_b.x << "\t" << force_b.y << "\t"   << force_b.z << std::endl;
     std::cout<< "T:         " << torque_b.x << "\t" << torque_b.y << "\t" << torque_b.z << std::endl;

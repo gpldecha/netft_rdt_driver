@@ -115,7 +115,7 @@ int main(int argc, char **argv)
   diag_array.status.reserve(1);
   diagnostic_updater::DiagnosticStatusWrapper diag_status;
   ros::Time                                   last_diag_pub_time(ros::Time::now());
-  netft_rdt_driver::NetFTRDTDriverBias        bias;
+  netft_rdt_driver::NetFTRDTDriverBias        bias(nh);
 
 
   while (ros::ok())
@@ -125,13 +125,12 @@ int main(int argc, char **argv)
       netft->getData(data);
       if (publish_wrench) 
       {
-        //geometry_msgs::Wrench(data.wrench);
         pub.publish(data.wrench);
       }
       else 
       {
         bias.compute_bias(data.wrench);
-//        bias.update(data.wrench); LET USER REMOVE HIS OWN BIAS
+        bias.update(data.wrench);
         pub.publish(data);
       }
     }
