@@ -60,6 +60,9 @@ int main(int argc, char **argv)
   std::string frame_id;
 
   nh.param<std::string>("frame_id",frame_id,"");
+  bool b_bias_on_startup;
+  nh.param<bool>("bias_on_startup",b_bias_on_startup,false);
+
   float pub_rate_hz;
   string address;
 
@@ -121,6 +124,9 @@ int main(int argc, char **argv)
   netft_rdt_driver::NetFTRDTDriverBias        bias(nh);
 
 
+    if(b_bias_on_startup){
+      bias.set_compute_bias(true);
+      }
   while (ros::ok())
   {
     if (netft->waitForNewData())

@@ -33,6 +33,9 @@ void NetFTRDTDriverBias::update(geometry_msgs::Wrench& wrench){
 
 }
 
+  void NetFTRDTDriverBias::set_compute_bias(bool val){
+    this->bComputeBias = val;
+  }
 void NetFTRDTDriverBias::compute_bias(const geometry_msgs::Wrench& wrench){
     if(bComputeBias){
         if(count < num_points){
@@ -62,6 +65,7 @@ void NetFTRDTDriverBias::compute_bias(const geometry_msgs::Wrench& wrench){
         }
     }
 }
+
 
 bool NetFTRDTDriverBias::service_callback(netft_rdt_driver::String_cmd::Request& request, netft_rdt_driver::String_cmd::Response& response){
     std::string cmd = request.cmd;

@@ -21,6 +21,8 @@ public:
 
     void compute_bias(const geometry_msgs::Wrench& wrench);
 
+  void set_compute_bias(bool val=true);
+
 private:
 
     void print_bias() const;
