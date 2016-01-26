@@ -256,7 +256,6 @@ void NetFTRDTDriver::recvThreadFunc()
         {
           tmp_data.header.seq = seq_counter_++;
           tmp_data.header.stamp = ros::Time::now();
-          tmp_data.header.frame_id = "plug_link";
           tmp_data.wrench.force.x = double(rdt_record.fx_) * force_scale_;
           tmp_data.wrench.force.y = double(rdt_record.fy_) * force_scale_;
           tmp_data.wrench.force.z = double(rdt_record.fz_) * force_scale_;

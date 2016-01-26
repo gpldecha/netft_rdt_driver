@@ -55,8 +55,11 @@ using namespace std;
 int main(int argc, char **argv)
 { 
   ros::init(argc, argv, "netft_node");
-  ros::NodeHandle nh;
 
+  ros::NodeHandle nh("~");
+  std::string frame_id;
+
+  nh.param<std::string>("frame_id",frame_id,"");
   float pub_rate_hz;
   string address;
 
@@ -123,6 +126,9 @@ int main(int argc, char **argv)
     if (netft->waitForNewData())
     {
       netft->getData(data);
+      // set the frame_id field (from rosparam loaded above)
+      // defaults to empty string
+      data.header.frame_id = frame_id;
       if (publish_wrench) 
       {
         pub.publish(data.wrench);
