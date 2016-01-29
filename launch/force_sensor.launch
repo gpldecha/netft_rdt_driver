@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+	<group ns="force_sensor">
+	  <arg name="ip_address" 	default="128.178.145.98" />
+	  <arg name="filter" 	default="true" />
+	  <!-- do you want to remove bias when launching? -->
+	  <param name = "bias_on_startup" value="true"/>
+	  <!-- do you want to assign a frame id to the measuremetns? -->
+	  <param name = "frame_id" value=""/>
+	    <!-- launch the netft node -->
+	   <node name="netft_node" pkg="netft_rdt_driver" type="netft_node"  args="--address $(arg ip_address)" required="true" output="screen"/>
+	   <!-- do you want the filter?-->
+	   <group if="$(arg filter)">
+	    <param name="smoothing_factor" value="0.01"/>
+	    <param name="output_topic" value="filtered_wrench"/>
+	   <node name="wrench_filter_node" pkg="netft_rdt_driver" type="force_filter_node.py" />
+	   </group>
+	</group>
+
+</launch>
